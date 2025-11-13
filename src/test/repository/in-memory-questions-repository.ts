@@ -1,6 +1,5 @@
 import type { QuestionRepository } from '@/domain/forum/application/repositories/question-repository.js'
 import type { Question } from '@/domain/forum/enterprise/entities/question.js'
-import type { Slug } from '@/domain/forum/enterprise/entities/value-objects/slug.js'
 
 export class InMemoryQuestionsRepository implements QuestionRepository {
   public items: Question[] = []
@@ -29,5 +28,10 @@ export class InMemoryQuestionsRepository implements QuestionRepository {
 
   async delete(id: string): Promise<void> {
     this.items = this.items.filter((item) => item.id.toString() != id )
+  }
+
+  async edit(question: Question): Promise<void> {
+    const questionIndex = this.items.findIndex((item) => item.id == question.id)
+    this.items[questionIndex] = question
   }
 }
