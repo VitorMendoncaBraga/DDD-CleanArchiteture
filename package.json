@@ -1,0 +1,19 @@
+{
+  "devDependencies": {
+    "@faker-js/faker": "^10.1.0",
+    "@rocketseat/eslint-config": "^2.2.2",
+    "@types/node": "^24.10.0",
+    "eslint": "^8.57.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.8"
+  },
+  "type": "module",
+  "scripts": {
+    "test": "npx vitest run",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.19"
+  }
+}
