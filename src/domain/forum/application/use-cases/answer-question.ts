@@ -1,3 +1,4 @@
+import { right, type Either } from '@/core/either.js'
 import { UniqueEntityId } from '../../../../core/entities/unique-entity-id.js'
 import { Answer } from '../../enterprise/entities/answer.js'
 import type { AnswerRepository } from '@/domain/forum/application/repositories/answer-repository.js'
@@ -23,7 +24,7 @@ export class AnswerQuestionUseCase {
     instructorId,
     questionId,
     content,
-  }: AnswerQuestionUseCaseRequest) {
+  }: AnswerQuestionUseCaseRequest) : Promise<Either<null, AnswerQuestionUseCaseResponse>> {
     const answer = Answer.create({
       content,
       instructorId: UniqueEntityId.create(instructorId),
@@ -32,8 +33,6 @@ export class AnswerQuestionUseCase {
 
     await this.answerRepository.create(answer)
 
-    return {
-      answer,
-    }
+    return right({answer})
   }
 }

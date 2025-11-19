@@ -13,12 +13,12 @@ beforeEach(() => {
 
 describe('Create Question', () => {
   test('it should be able to create a question', async () => {
-    const { question } = await createQuestionUseCase.execute({
+    const result = await createQuestionUseCase.execute({
       content: 'Uma pergunta',
       authorId: '1',
       title: 'Um título',
     })
-    expect(question.title).toEqual('Um título')
-    expect(question.id).toBeTruthy()
+    expect(result.isRight()).toBeTruthy()
+    expect(result.value?.question.content).toEqual("Uma pergunta")
   })
 })

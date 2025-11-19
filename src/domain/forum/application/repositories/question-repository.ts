@@ -1,5 +1,5 @@
+import type { PaginationParams } from '@/core/repositories/pagination-params.js'
 import type { Question } from '../../enterprise/entities/question.js'
-import type { Slug } from '../../enterprise/entities/value-objects/slug.js'
 
 export interface QuestionRepository {
   create(question: Question): Promise<void>
@@ -7,4 +7,5 @@ export interface QuestionRepository {
   findById(id: string): Promise<Question | null>
   delete(id: string): Promise<void>
   edit(question: Question): Promise<void>
+  findManyRecently({ page }: PaginationParams): Promise<Question[]>
 }

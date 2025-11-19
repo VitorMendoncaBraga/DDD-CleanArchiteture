@@ -1,6 +1,7 @@
 import { UniqueEntityId } from '@/core/entities/unique-entity-id.js'
 import { Question } from '../../enterprise/entities/question.js'
 import type { QuestionRepository } from '../repositories/question-repository.js'
+import { right, type Either } from '@/core/either.js'
 
 interface CreateQuestionUseCaseRequest {
   title: string
@@ -8,9 +9,9 @@ interface CreateQuestionUseCaseRequest {
   authorId: string
 }
 
-interface CreateQuestionUseCaseResponse {
+type CreateQuestionUseCaseResponse = Either<null, {
   question: Question
-}
+}>
 
 export class CreateQuestionUseCase {
   private questionRepository: QuestionRepository
@@ -29,8 +30,8 @@ export class CreateQuestionUseCase {
       authorId: UniqueEntityId.create(authorId),
     })
     await this.questionRepository.create(question)
-    return {
+    return right({
       question,
-    }
+    })
   }
 }

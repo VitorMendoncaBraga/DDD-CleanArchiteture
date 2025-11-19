@@ -13,10 +13,12 @@ beforeEach(() => {
 test('create an answer', async () => {
   console.log(answerQuestionUseCase)
 
-  const { answer } = await answerQuestionUseCase.execute({
+  const result = await answerQuestionUseCase.execute({
     content: 'Nova resposta',
     instructorId: '1',
     questionId: '1',
   })
-  expect(answer.content).toEqual('Nova resposta')
+
+  expect(result.isRight()).toBeTruthy()
+  expect(result.value?.answer.content).toEqual("Nova resposta")
 })

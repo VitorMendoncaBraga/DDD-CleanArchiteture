@@ -16,7 +16,7 @@ export class UniqueEntityId {
   }
 
   static create(id?: string) {
-    if(!id) {
+    if (!id) {
       return new UniqueEntityId(randomUUID())
     }
     return new UniqueEntityId(id)
